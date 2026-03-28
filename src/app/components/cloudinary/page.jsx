@@ -1,5 +1,5 @@
 // app/profile/page.jsx
-import ProfileImageUpload from '@/components/cloudinary/ProfileImageUpload';
+import ProfileImageUpload from './ProfileImageUpload';
 import { Suspense } from 'react';
 import Image from 'next/image';
 
