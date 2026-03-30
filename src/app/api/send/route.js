@@ -122,6 +122,13 @@ export async function POST(request) {
     }
 
     // 5. Success Response
+    const acceptHeader = request.headers.get("accept") || "";
+    // If the browser natively submitted an HTML form, redirect them gracefully to our Sendly Ad page.
+    if (acceptHeader.includes("text/html")) {
+      return NextResponse.redirect(new URL("/success", request.url));
+    }
+
+    // Otherwise, for JS fetch requests, just return the standard lightweight JSON.
     return NextResponse.json(
       { status: "success", message: "Email sent successfully" }, 
       { status: 200, headers: corsHeaders }

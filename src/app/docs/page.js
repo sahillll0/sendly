@@ -95,6 +95,16 @@ export default function DocsPage() {
             <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
               After submission, Sendly securely processes your fields and directly drops a clean, formatted email into the account owner's inbox. Make sure to replace <code className="text-sm bg-muted px-1.5 py-0.5 rounded border border-border">http://your-domain.com</code> with your actual site URL.
             </p>
+
+            <div className="bg-primary/5 p-5 rounded-xl border border-primary/20 mt-6 shadow-sm">
+              <h4 className="font-semibold text-primary mb-2 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                Automatic Success Redirect
+              </h4>
+              <p className="text-sm text-foreground leading-relaxed">
+                When your users submit a standard HTML form natively (without using JavaScript or <code className="text-xs bg-muted px-1.5 py-0.5 rounded">fetch</code>), our API automatically redirects them to a beautiful Sendly-hosted Success Page confirming their message was received. This page includes a small tag showing they are powered by Sendly.
+              </p>
+            </div>
           </section>
 
           {/* 4. API Endpoint */}
@@ -297,9 +307,12 @@ export default function ContactForm() {
               9. Notes & Best Practices
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
-                <h4 className="font-semibold mb-2">🔒 Keep It Secure</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">Always keep API keys secure. Do not expose them wildly in public uncompiled repositories without environment variables.</p>
+              <div className="p-5 border border-red-500/30 rounded-xl bg-red-500/5 shadow-sm">
+                <h4 className="font-bold text-red-600 dark:text-red-400 mb-2 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                  Keep Your API Key Private!
+                </h4>
+                <p className="text-sm text-foreground font-medium leading-relaxed">For your absolute safety, <strong>NEVER</strong> paste your Secret API Key openly in public repositories or unprotected client-side code where anyone can scrape it. If you must embed it directly in HTML forms on your site, heavily restrict your key to only your approved domains via the Sendly dashboard.</p>
               </div>
               <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
                 <h4 className="font-semibold mb-2">✅ Frontend Validations</h4>
