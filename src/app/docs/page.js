@@ -221,7 +221,7 @@ export default function DocsPage() {
 .then(response => response.json())
 .then(data => {
   if (data.status === "success") {
-    console.log("Email properly securely sent!");
+    window.location.href = "https://sendly-bay.vercel.app/success";
   }
 });`} />
 
@@ -256,8 +256,8 @@ export default function ContactForm() {
       
       const data = await res.json();
       if (data.status === "success") {
-        setStatus("Message Sent!");
-        e.target.reset();
+        // Automatically redirect to the Sendly visual Success Page ad!
+        window.location.href = "https://sendly-bay.vercel.app/success";
       } else {
         setStatus("Error: " + data.message);
       }

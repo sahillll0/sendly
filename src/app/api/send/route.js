@@ -122,9 +122,10 @@ export async function POST(request) {
     }
 
     // 5. Success Response
-    const acceptHeader = request.headers.get("accept") || "";
+    const isNativeForm = contentType.includes("application/x-www-form-urlencoded") || contentType.includes("multipart/form-data");
+    
     // If the browser natively submitted an HTML form, redirect them gracefully to our Sendly Ad page.
-    if (acceptHeader.includes("text/html")) {
+    if (isNativeForm) {
       return NextResponse.redirect(new URL("/success", request.url), 303);
     }
 
