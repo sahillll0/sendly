@@ -125,7 +125,7 @@ export async function POST(request) {
     const acceptHeader = request.headers.get("accept") || "";
     // If the browser natively submitted an HTML form, redirect them gracefully to our Sendly Ad page.
     if (acceptHeader.includes("text/html")) {
-      return NextResponse.redirect(new URL("/success", request.url));
+      return NextResponse.redirect(new URL("/success", request.url), 303);
     }
 
     // Otherwise, for JS fetch requests, just return the standard lightweight JSON.
