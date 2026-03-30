@@ -77,9 +77,9 @@ export default function DocsPage() {
               Sendly is completely framework-agnostic. You can easily use native HTML forms or any library you choose. Make sure you place your API key securely into the <code className="text-sm bg-muted px-1.5 py-0.5 rounded border border-border">apiKey</code> field.
             </p>
             
-            <CodeBlock code={`<form action="https://api.sendly.com/v1/send" method="POST">
-  <!-- Place your API key here securely -->
-  <input type="hidden" name="apiKey" value="snd_test_xxxxxxxxxxxxxxxx" />
+            <CodeBlock code={`<form action="https://sendly-three.vercel.app/api/send" method="POST">
+  <!-- Place your Project API key here -->
+  <input type="hidden" name="apiKey" value="sk_live_xxxxxxxxxxxxxxxx" />
 
   <label for="name">Name</label>
   <input type="text" id="name" name="name" required />
@@ -93,12 +93,57 @@ export default function DocsPage() {
   <button type="submit">Send Message</button>
 </form>`} />
             <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-              After submission, Sendly securely processes your fields and directly drops a clean, formatted email into the account owner's inbox.
+              After submission, Sendly securely processes your fields and directly drops a clean, formatted email into the account owner's inbox. Make sure to replace <code className="text-sm bg-muted px-1.5 py-0.5 rounded border border-border">http://your-domain.com</code> with your actual site URL.
             </p>
           </section>
 
           {/* 4. API Endpoint */}
           <section id="api-endpoint">
+            <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
+              4. API Endpoint
+            </h2>
+            <p className="text-muted-foreground mb-4 leading-relaxed">
+              If you prefer using JavaScript (AJAX/Fetch), you can call our endpoint directly with JSON data.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="px-2 py-1 bg-green-500/10 text-green-500 text-xs font-bold rounded">POST</span>
+                <code className="text-sm font-mono text-foreground">/api/send</code>
+              </div>
+              <CodeBlock code={`fetch('https://sendly-three.vercel.app/api/send', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'x-api-key': 'sk_live_xxxxxxxxxxxxxxxx'
+  },
+  body: JSON.stringify({
+    name: 'Jane Doe',
+    email: 'jane@example.com',
+    message: 'Hello, this API is amazing!'
+  })
+})`} />
+            </div>
+          </section>
+
+          {/* 5. CORS & Security */}
+          <section id="cors">
+            <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
+              5. CORS & Security
+            </h2>
+            <p className="text-muted-foreground mb-4 leading-relaxed">
+              Sendly has built-in CORS support, allowing you to call the API from any domain. You don't need to configure any extra headers on your server.
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-2">
+              <li>Supports <code className="text-xs bg-muted p-1 rounded">application/json</code> and <code className="text-xs bg-muted p-1 rounded">application/x-www-form-urlencoded</code>.</li>
+              <li>Always use your <strong>Secret API Key</strong> starting with <code className="text-xs bg-muted p-1 rounded">sk_</code>.</li>
+              <li>Keep your API keys private. Never share them in public repositories.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}          <section id="api-endpoint">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
               4. API Endpoint
             </h2>
