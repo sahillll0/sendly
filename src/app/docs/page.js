@@ -186,21 +186,23 @@ export default function DocsPage() {
             </p>
           </section>
 
-          {/* 7. Example Request */}
-          <section id="example-request">
+          {/* 7. Integration Examples */}
+          <section id="integration-examples">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              7. Example Request
+              7. Integration Examples
             </h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              For most JavaScript frameworks, fetching is incredibly straightforward:
+              Here is the best way to integrate Sendly into your existing projects. You can pass the API key either securely in the body payload or via the <code className="text-xs bg-muted px-1.5 py-0.5 rounded">apikey</code> header.
             </p>
+
+            <h3 className="font-semibold text-lg mb-4 text-foreground mt-8">Vanilla JavaScript Fetch</h3>
             <CodeBlock code={`fetch("https://sendly-bay.vercel.app/api/send", {
   method: "POST",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "apikey": "sk_live_YOUR_API_KEY" // Pass key in header securely
   },
   body: JSON.stringify({
-    apiKey: "snd_test_xxxxxxxxxxxxxxxx",
     name: "John Doe",
     email: "john@example.com",
     message: "I am really interested in your services!"
@@ -208,10 +210,62 @@ export default function DocsPage() {
 })
 .then(response => response.json())
 .then(data => {
-  if (data.success) {
+  if (data.status === "success") {
     console.log("Email properly securely sent!");
   }
 });`} />
+
+            <h3 className="font-semibold text-lg mb-4 text-foreground mt-10">React / Next.js Component (Drop-in ready)</h3>
+            <p className="text-muted-foreground mb-4 leading-relaxed">
+              If you are using React or Next.js, you can seamlessly copy and paste this Contact Form component into your frontend project.
+            </p>
+            <CodeBlock code={`import { useState } from "react";
+
+export default function ContactForm() {
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("Sending...");
+
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      message: e.target.message.value,
+    };
+
+    try {
+      const res = await fetch("https://sendly-bay.vercel.app/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": "sk_live_YOUR_API_KEY" // Add your Secret API key here
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await res.json();
+      if (data.status === "success") {
+        setStatus("Message Sent!");
+        e.target.reset();
+      } else {
+        setStatus("Error: " + data.message);
+      }
+    } catch (err) {
+      setStatus("Failed to send the message.");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '400px' }}>
+      <input type="text" name="name" placeholder="Your Name" required style={{ padding: '0.5rem' }} />
+      <input type="email" name="email" placeholder="Your Email" required style={{ padding: '0.5rem' }} />
+      <textarea name="message" placeholder="Your Message" required style={{ padding: '0.5rem', minHeight: '100px' }} />
+      <button type="submit" style={{ padding: '0.5rem', cursor: 'pointer' }}>Submit</button>
+      {status && <p>{status}</p>}
+    </form>
+  );
+}`} />
           </section>
 
           {/* 8. How It Works */}

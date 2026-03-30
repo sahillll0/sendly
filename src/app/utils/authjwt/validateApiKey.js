@@ -7,7 +7,7 @@ export async function validateApiKey(request, manualKey = null) {
   try {
     let apiKey = manualKey;
     if (!apiKey) {
-      apiKey = request.headers.get("x-api-key");
+      apiKey = request.headers.get("x-api-key") || request.headers.get("apikey");
     }
     
     if (!apiKey) {
