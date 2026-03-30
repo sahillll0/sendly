@@ -126,7 +126,7 @@ export async function POST(request) {
     
     // If the browser natively submitted an HTML form, redirect them gracefully to our Sendly Ad page.
     if (isNativeForm) {
-      return NextResponse.redirect(new URL("/success", request.url), 303);
+      return window.location.href = "https://sendly-bay.vercel.app/success";
     }
 
     // Otherwise, for JS fetch requests, just return the standard lightweight JSON.
