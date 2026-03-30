@@ -139,13 +139,11 @@ export default function DocsPage() {
               <li>Keep your API keys private. Never share them in public repositories.</li>
             </ul>
           </section>
-        </div>
-      </div>
-    </div>
-  );
-}          <section id="api-endpoint">
+
+          {/* 6. API Endpoint Details */}
+          <section id="api-endpoint-details">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              4. API Endpoint
+              6. API Endpoint Details
             </h2>
             <div className="flex items-center gap-4 mb-8 bg-muted p-4 rounded-xl border border-border">
               <span className="px-3 py-1 bg-green-500/15 text-green-700 dark:text-green-400 font-mono text-sm font-semibold rounded-md border border-green-500/30">POST</span>
@@ -188,10 +186,10 @@ export default function DocsPage() {
             </p>
           </section>
 
-          {/* 5. Example Request */}
+          {/* 7. Example Request */}
           <section id="example-request">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              5. Example Request
+              7. Example Request
             </h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
               For most JavaScript frameworks, fetching is incredibly straightforward:
@@ -216,10 +214,10 @@ export default function DocsPage() {
 });`} />
           </section>
 
-          {/* 6. How It Works */}
+          {/* 8. How It Works */}
           <section id="how-it-works">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              6. How It Works
+              8. How It Works
             </h2>
             <div className="space-y-6 pl-2 border-l-2 border-primary/20 ml-4 py-2">
               {[ 
@@ -239,10 +237,10 @@ export default function DocsPage() {
             </div>
           </section>
 
-          {/* 7. Notes & Best Practices */}
+          {/* 9. Notes & Best Practices */}
           <section id="best-practices">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              7. Notes & Best Practices
+              9. Notes & Best Practices
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
                <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
@@ -264,10 +262,10 @@ export default function DocsPage() {
             </div>
           </section>
 
-          {/* 8. Error Handling */}
+          {/* 10. Error Handling */}
           <section id="error-handling">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              8. Error Handling
+              10. Error Handling
             </h2>
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Sendly uses conventional HTTP response codes universally correctly to indicate the success or standard failure of an API request.
@@ -305,10 +303,10 @@ export default function DocsPage() {
             </div>
           </section>
 
-          {/* 9. FAQ Section */}
+          {/* 11. FAQ Section */}
           <section id="faq">
             <h2 className="text-2xl font-semibold mb-6 text-foreground border-b border-border pb-3">
-              9. FAQ Section
+              11. FAQ Section
             </h2>
             <div className="space-y-6">
               <div className="pl-4 border-l-[3px] border-primary/30">
