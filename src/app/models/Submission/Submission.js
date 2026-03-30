@@ -29,6 +29,10 @@ const SubmissionSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    extraData: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {},
+    },
   },
   { timestamps: true }
 );

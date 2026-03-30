@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export async function sendEmail({ to, replyTo, name, message, isAutoReply = false, ownerName = "our website" }) {
+export async function sendEmail({ to, replyTo, name, message, isAutoReply = false, ownerName = "our website", extraData = {} }) {
   // Use environment variables or fallback to testing credentials (ethereal)
   const smtpHost = process.env.SMTP_HOST || 'smtp.ethereal.email';
   const smtpPort = parseInt(process.env.SMTP_PORT || '587', 10);
@@ -35,6 +35,25 @@ export async function sendEmail({ to, replyTo, name, message, isAutoReply = fals
 
   const senderName = name ? `${name} (Form Submission)` : 'New Form Submission';
 
+  let extraDataHtml = '';
+  let extraDataText = '';
+  if (extraData && Object.keys(extraData).length > 0) {
+    extraDataHtml = `
+      <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #f1f5f9; margin-top: 20px;">
+        <p style="margin: 0 0 10px 0; font-weight: 600; color: #64748b; font-size: 12px; text-transform: uppercase;">Additional Fields</p>
+        <table style="width: 100%; border-collapse: collapse;">
+          ${Object.entries(extraData).map(([key, value]) => `
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e2e8f0; color: #64748b; width: 40%; font-size: 14px;"><strong>${key}</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-size: 14px; white-space: pre-wrap;">${value}</td>
+            </tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+    extraDataText = '\n\nAdditional Fields:\n' + Object.entries(extraData).map(([k, v]) => `${k}: ${v}`).join('\n');
+  }
+
   let mailOptions;
 
   if (isAutoReply) {
@@ -43,7 +62,7 @@ export async function sendEmail({ to, replyTo, name, message, isAutoReply = fals
       replyTo: replyTo,
       to: to,
       subject: `Confirmation: Your message to ${ownerName} was received`,
-      text: `Hi ${name || 'there'},\n\nThank you for reaching out! This is a quick confirmation that we have successfully received your message sent to ${ownerName}.\n\nYour message details:\nName: ${name}\nMessage: ${message}\n\nWe will get back to you shortly.\n\nBest regards,\nThe ${ownerName} Team`,
+      text: `Hi ${name || 'there'},\n\nThank you for reaching out! This is a quick confirmation that we have successfully received your message sent to ${ownerName}.\n\nYour message details:\nName: ${name}\nMessage: ${message}${extraDataText}\n\nWe will get back to you shortly.\n\nBest regards,\nThe ${ownerName} Team`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
           <div style="text-align: center; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9; margin-bottom: 20px;">
@@ -58,6 +77,7 @@ export async function sendEmail({ to, replyTo, name, message, isAutoReply = fals
             <p style="margin: 0; font-weight: 600; color: #64748b; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em;">Your Message Preview</p>
             <p style="margin-top: 8px; font-style: italic; color: #334155;">"${message}"</p>
           </div>
+          ${extraDataHtml}
           
           <p>The team will review your submission and get back to you shortly.</p>
           
@@ -74,7 +94,7 @@ export async function sendEmail({ to, replyTo, name, message, isAutoReply = fals
       replyTo: replyTo,
       to: to,
       subject: `New Form Submission: ${senderName}`,
-      text: `You have a new submission for ${ownerName}.\n\nFrom: ${senderName} (${replyTo})\n\nMessage:\n${message}`,
+      text: `You have a new submission for ${ownerName}.\n\nFrom: ${senderName} (${replyTo})\n\nMessage:\n${message}${extraDataText}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; line-height: 1.6; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
           <div style="background-color: #3b82f6; padding: 20px; border-radius: 8px 8px 0 0; margin: -20px -20px 20px -20px; text-align: center;">
@@ -100,6 +120,7 @@ export async function sendEmail({ to, replyTo, name, message, isAutoReply = fals
             <p style="margin: 0 0 10px 0; font-weight: 600; color: #64748b; font-size: 12px; text-transform: uppercase;">Message Content</p>
             <p style="margin: 0; color: #334155; white-space: pre-wrap;">${message}</p>
           </div>
+          ${extraDataHtml}
           
           <div style="margin-top: 30px; text-align: center;">
             <a href="mailto:${replyTo}" style="display: inline-block; padding: 12px 24px; background-color: #3b82f6; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Reply Directly</a>

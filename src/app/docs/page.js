@@ -200,7 +200,7 @@ export default function DocsPage() {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "apikey": "sk_live_YOUR_API_KEY" // Pass key in header securely
+    "apikey": "sk_live_YOUR_API_KEY" // Pass API key in header. For security, always store your key in a .env file.
   },
   body: JSON.stringify({
     name: "John Doe",

@@ -44,7 +44,7 @@ export async function POST(request) {
       );
     }
 
-    const { apiKey: bodyApiKey, name, email, message } = body;
+    const { apiKey: bodyApiKey, name, email, message, ...extraData } = body;
 
     // 1. Validate API Key (checks body first, then headers)
     const { user, project, response } = await validateApiKey(request, bodyApiKey);
@@ -87,6 +87,7 @@ export async function POST(request) {
       name: name?.trim() || "Anonymous",
       email: email.trim(),
       message: message.trim(),
+      extraData,
     });
     await newSubmission.save();
 
@@ -99,6 +100,7 @@ export async function POST(request) {
         name: name?.trim(),
         message: message.trim(),
         ownerName: project.name || "your project",
+        extraData,
       });
 
       // 4b. Send an auto-reply confirmation to the form submitter (End User)
@@ -109,6 +111,7 @@ export async function POST(request) {
         message: message.trim(),
         isAutoReply: true,
         ownerName: project.name || "our website",
+        extraData,
       });
     } catch (emailError) {
       console.error("Email sending failed:", emailError);

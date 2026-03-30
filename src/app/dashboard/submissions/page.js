@@ -213,7 +213,29 @@ export default function SubmissionsPage() {
                                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
                                   <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">{sub.message}</p>
                                 </div>
-                                <div className="flex justify-end">
+
+                                {sub.extraData && Object.keys(sub.extraData).length > 0 && (
+                                  <>
+                                    <div className="flex items-center space-x-2 text-xs font-bold text-slate-500 uppercase tracking-widest mt-4">
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                                      </svg>
+                                      <span>Additional Fields</span>
+                                    </div>
+                                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                                      <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                                        {Object.entries(sub.extraData).map(([key, value]) => (
+                                          <div key={key} className="flex flex-col">
+                                            <dt className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{key}</dt>
+                                            <dd className="mt-1 text-sm text-slate-300 break-words">{String(value)}</dd>
+                                          </div>
+                                        ))}
+                                      </dl>
+                                    </div>
+                                  </>
+                                )}
+
+                                <div className="flex justify-end mt-4">
                                   <a 
                                     href={`mailto:${sub.email}`}
                                     className="px-4 py-2 rounded-xl bg-primary/10 text-primary text-sm font-bold hover:bg-primary hover:text-white transition-all"

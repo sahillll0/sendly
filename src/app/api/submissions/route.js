@@ -47,7 +47,7 @@ export async function GET(request) {
 
     // Fetch submissions belonging to the logged in user
     const submissions = await Submission.find({ userId: decodedUser.userId })
-      .select('name email message createdAt')
+      .select('name email message extraData createdAt')
       .sort({ createdAt: -1 })
       .lean();
 
