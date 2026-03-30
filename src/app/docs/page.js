@@ -18,7 +18,7 @@ export default function DocsPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:py-20 lg:px-8 font-sans">
-        
+
         {/* Header */}
         <div className="mb-14 border-b border-border pb-10">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 text-foreground">
@@ -30,7 +30,7 @@ export default function DocsPage() {
         </div>
 
         <div className="space-y-20">
-          
+
           {/* 1. Introduction */}
           <section id="introduction">
             <h2 className="text-2xl font-semibold mb-5 text-foreground">1. Introduction</h2>
@@ -39,7 +39,7 @@ export default function DocsPage() {
             </p>
             <div className="bg-primary/5 border border-primary/20 rounded-xl p-5 shadow-sm">
               <p className="font-medium text-primary flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></svg>
                 Key Benefit: No backend required. Just plug and play.
               </p>
             </div>
@@ -76,7 +76,7 @@ export default function DocsPage() {
             <p className="text-muted-foreground mb-4 leading-relaxed">
               Sendly is completely framework-agnostic. You can easily use native HTML forms or any library you choose. Make sure you place your API key securely into the <code className="text-sm bg-muted px-1.5 py-0.5 rounded border border-border">apiKey</code> field.
             </p>
-            
+
             <CodeBlock code={`<form action="https://sendly-bay.vercel.app/api/send" method="POST">
   <!-- Place your Project API key here -->
   <input type="hidden" name="apiKey" value="sk_live_xxxxxxxxxxxxxxxx" />
@@ -220,7 +220,7 @@ export default function DocsPage() {
               8. How It Works
             </h2>
             <div className="space-y-6 pl-2 border-l-2 border-primary/20 ml-4 py-2">
-              {[ 
+              {[
                 "User beautifully submits the form on your website.",
                 "The payload request is safely sent directly to the Sendly API endpoint.",
                 "Sendly strictly validates your API key and the provided data.",
@@ -243,22 +243,22 @@ export default function DocsPage() {
               9. Notes & Best Practices
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
-               <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
-                 <h4 className="font-semibold mb-2">🔒 Keep It Secure</h4>
-                 <p className="text-sm text-muted-foreground leading-relaxed">Always keep API keys secure. Do not expose them wildly in public uncompiled repositories without environment variables.</p>
-               </div>
-               <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
-                 <h4 className="font-semibold mb-2">✅ Frontend Validations</h4>
-                 <p className="text-sm text-muted-foreground leading-relaxed">Validate form inputs heavily on the frontend (like email format validation) so your users get active immediate feedback before submit.</p>
-               </div>
-               <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
-                 <h4 className="font-semibold mb-2">📩 Proper Formats</h4>
-                 <p className="text-sm text-muted-foreground leading-relaxed">Use proper universally accepted email formats. Sendly actively rejects emails that don't match standard structural validation.</p>
-               </div>
-               <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
-                 <h4 className="font-semibold mb-2">🌐 Domain Locking</h4>
-                 <p className="text-sm text-muted-foreground leading-relaxed">While client-side API calls are possible, highly restrict and lock your API key to only your approved domains in the Sendly dashboard.</p>
-               </div>
+              <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
+                <h4 className="font-semibold mb-2">🔒 Keep It Secure</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">Always keep API keys secure. Do not expose them wildly in public uncompiled repositories without environment variables.</p>
+              </div>
+              <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
+                <h4 className="font-semibold mb-2">✅ Frontend Validations</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">Validate form inputs heavily on the frontend (like email format validation) so your users get active immediate feedback before submit.</p>
+              </div>
+              <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
+                <h4 className="font-semibold mb-2">📩 Proper Formats</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">Use proper universally accepted email formats. Sendly actively rejects emails that don't match standard structural validation.</p>
+              </div>
+              <div className="p-5 border border-border rounded-xl bg-card shadow-sm">
+                <h4 className="font-semibold mb-2">🌐 Domain Locking</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">While client-side API calls are possible, highly restrict and lock your API key to only your approved domains in the Sendly dashboard.</p>
+              </div>
             </div>
           </section>
 
