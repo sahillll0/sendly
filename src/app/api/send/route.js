@@ -26,7 +26,7 @@ export async function POST(request) {
   try {
     let body;
     const contentType = request.headers.get("content-type") || "";
-    
+
     try {
       if (contentType.includes("application/json")) {
         body = await request.json();
@@ -39,7 +39,7 @@ export async function POST(request) {
       }
     } catch (e) {
       return NextResponse.json(
-        { status: "error", message: "Invalid request body or format" }, 
+        { status: "error", message: "Invalid request body or format" },
         { status: 400, headers: corsHeaders }
       );
     }
@@ -60,21 +60,21 @@ export async function POST(request) {
     // 2. Input Validation
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
-        { status: "error", message: "Email is required and must be a string" }, 
+        { status: "error", message: "Email is required and must be a string" },
         { status: 400, headers: corsHeaders }
       );
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { status: "error", message: "Invalid email format" }, 
+        { status: "error", message: "Invalid email format" },
         { status: 400, headers: corsHeaders }
       );
     }
 
     if (!message || typeof message !== 'string' || message.trim() === '') {
       return NextResponse.json(
-        { status: "error", message: "Message is required and cannot be empty" }, 
+        { status: "error", message: "Message is required and cannot be empty" },
         { status: 400, headers: corsHeaders }
       );
     }
@@ -116,29 +116,33 @@ export async function POST(request) {
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
       return NextResponse.json(
-        { status: "error", message: "Email sending failure" }, 
+        { status: "error", message: "Email sending failure" },
         { status: 500, headers: corsHeaders }
       );
     }
 
     // 5. Success Response
-    const isNativeForm = contentType.includes("application/x-www-form-urlencoded") || contentType.includes("multipart/form-data");
+    const responseTypeJson = request.headers.get("content-type")?.includes("application/json") || request.headers.get("accept")?.includes("application/json");
     
-    // If the browser natively submitted an HTML form, redirect them gracefully to our Sendly Ad page.
-    if (isNativeForm) {
-      return window.location.href = "https://sendly-bay.vercel.app/success";
+    // If the request is NOT unambiguously JSON (e.g. they use native HTML form or omitted headers), redirect them to the visual ad page!
+    if (!responseTypeJson) {
+      return NextResponse.redirect(new URL("/success", request.url), 302);
     }
 
     // Otherwise, for JS fetch requests, just return the standard lightweight JSON.
     return NextResponse.json(
-      { status: "success", message: "Email sent successfully" }, 
+      { 
+        status: "success", 
+        message: "Email sent successfully",
+        redirect_url: "https://sendly-bay.vercel.app/success"
+      },
       { status: 200, headers: corsHeaders }
     );
 
   } catch (error) {
     console.error("Form submission error:", error);
     return NextResponse.json(
-      { status: "error", message: "Internal server error" }, 
+      { status: "error", message: "Internal server error" },
       { status: 500, headers: corsHeaders }
     );
   }
