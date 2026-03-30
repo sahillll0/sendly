@@ -121,7 +121,7 @@ export default function LandingPage() {
   body: JSON.stringify({
     name: 'Jane Doe',
     email: 'jane@example.com',
-    message: 'Hello, this API is amazing!'
+    message: 'Hello, this API is amazing'
   })
 })`}
                     </code>
