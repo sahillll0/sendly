@@ -77,7 +77,7 @@ export default function DocsPage() {
               Sendly is completely framework-agnostic. You can easily use native HTML forms or any library you choose. Make sure you place your API key securely into the <code className="text-sm bg-muted px-1.5 py-0.5 rounded border border-border">apiKey</code> field.
             </p>
             
-            <CodeBlock code={`<form action="https://sendly-three.vercel.app/api/send" method="POST">
+            <CodeBlock code={`<form action="https://sendly-bay.vercel.app/api/send" method="POST">
   <!-- Place your Project API key here -->
   <input type="hidden" name="apiKey" value="sk_live_xxxxxxxxxxxxxxxx" />
 
@@ -110,7 +110,7 @@ export default function DocsPage() {
                 <span className="px-2 py-1 bg-green-500/10 text-green-500 text-xs font-bold rounded">POST</span>
                 <code className="text-sm font-mono text-foreground">/api/send</code>
               </div>
-              <CodeBlock code={`fetch('https://sendly-three.vercel.app/api/send', {
+              <CodeBlock code={`fetch('https://sendly-bay.vercel.app/api/send', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ export default function DocsPage() {
             </h2>
             <div className="flex items-center gap-4 mb-8 bg-muted p-4 rounded-xl border border-border">
               <span className="px-3 py-1 bg-green-500/15 text-green-700 dark:text-green-400 font-mono text-sm font-semibold rounded-md border border-green-500/30">POST</span>
-              <code className="text-base text-foreground font-mono">https://api.sendly.com/v1/send</code>
+              <code className="text-base text-foreground font-mono">https://sendly-bay.vercel.app/api/send</code>
             </div>
 
             <h3 className="font-semibold text-lg mb-4 text-foreground">Required Fields</h3>
@@ -194,7 +194,7 @@ export default function DocsPage() {
             <p className="text-muted-foreground mb-4 leading-relaxed">
               For most JavaScript frameworks, fetching is incredibly straightforward:
             </p>
-            <CodeBlock code={`fetch("https://api.sendly.com/v1/send", {
+            <CodeBlock code={`fetch("https://sendly-bay.vercel.app/api/send", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
