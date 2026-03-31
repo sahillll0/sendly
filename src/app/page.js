@@ -112,11 +112,11 @@ export default function LandingPage() {
                 <div className="p-4 sm:p-8 overflow-x-auto text-sm font-mono leading-relaxed">
                   <pre className="text-slate-300">
                     <code>
-{`fetch('https://sendly-three.vercel.app/api/send', {
+{`fetch('https://sendly-bay.vercel.app/api/send', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'x-api-key': 'sk_live_xxxxxxxxxxxxxxxx'
+    'apikey': 'sk_live_xxxxxxxxxxxxxxxx'
   },
   body: JSON.stringify({
     name: 'Jane Doe',
